@@ -1,0 +1,71 @@
+package obs;
+import java.util.*;
+import java.sql.*;
+class Obs_Modules extends Admin{
+	Scanner s=new Scanner(System.in);
+void books()
+{
+	String code,your_name,address,phone;
+	try {
+	String q="select * from books";
+	Statement st=con.createStatement();
+	ResultSet rs=st.executeQuery(q);
+	/*String code=rs.getString("book_code");
+	String name=rs.getString("book_name");
+	String publisher=rs.getString("publisher");*/
+	
+	while(rs.next())
+	{
+		System.out.println(rs.getString(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3));
+	}	
+	}catch(Exception ec)
+	{
+		System.out.println(ec);
+	}
+	System.out.println("Please enter the details to purchase a book:");
+	System.out.println("1.Bookcode:");
+	code=s.nextLine();
+	System.out.println("2.your_name:");
+	your_name=s.nextLine();
+	System.out.println("3.Address:");
+	address=s.nextLine();
+	System.out.println("4.PhoneNo:");
+	phone=s.nextLine();
+	try {
+	String sq2="insert into p_details values('"+code+"','"+your_name+"','"+address+"','"+phone+"')";
+	Statement st=con.createStatement();
+	st.executeUpdate(sq2);
+	System.out.println("value Inserted");
+	}catch(Exception e)
+	{
+		System.out.println(e);
+	}
+}
+void new_arrivals()
+{
+	try{
+		String sq="select * from new_arrivals";
+		Statement st=con.createStatement();
+		ResultSet rs=st.executeQuery(sq);
+		while(rs.next())
+		{
+			System.out.println(rs.getInt(1)+" "+rs.getString(2)+" "+rs.getString(3));
+		}
+	}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+}
+void about()
+{
+	System.out.println("*We are the most popular book store in your country.\n *we provide a wide range of books in our store.\n * till date we provided 1000+ books to our happy customers\n * feel comfortable to shop with us\n * If you have any queries please reach us through help desk ");
+}
+void help()
+{
+	System.out.println("Contact us on:\n M:9999888810\n E:onlinebookstore.com");
+}
+
+}
+
+
